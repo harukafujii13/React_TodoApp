@@ -24,11 +24,21 @@ function TodoApp() {
         })
     }
 
+    //TodoItemnのcheckboxでチェックしたidを引数とし、prevStateのtodosオブジェクトの中の
+    //todoの中のtodo.idと引数のidが一致したらcompletedがtrueになる
+
+
     const deleteTodo = (id) => {
         setTodos((prevState) => {
             return prevState.filter(todo => todo.id !== id)
         })
     }
+
+    //Inside the callback function, the filter function is used to 
+    //create a new array that includes only the todo items that do not 
+    //have the same id as the id passed as a parameter to the deleteTodo function.
+
+
 
     const addTodo = (title) => {
         const newTodo = {
