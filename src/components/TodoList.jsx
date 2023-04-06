@@ -1,18 +1,20 @@
-import React from "react";
+import React from 'react'
 import TodoItem from '@/components/TodoItem'
 
-todos: {
-  list: []
-  title: 'todos'
-}
+function TodoList({ todos, handleChange, deleteTodo }) {
 
-function TodoList({todos}) {
-  return(
-    <ul>
-  {todos?.map((todo)=> 
-  <TodoItem key={todo.id} todoItem={todo}/>)}
-    </ul>
-  )
+    return (
+        <ul>
+            {todos?.map((todo) =>
+                <TodoItem
+                    key={todo.id}
+                    todoItem={todo}
+                    handleChange={handleChange}
+                    deleteTodo={deleteTodo}
+                />
+            )}
+        </ul>
+    )
 }
 
 export default TodoList
