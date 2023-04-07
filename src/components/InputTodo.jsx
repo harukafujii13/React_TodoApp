@@ -13,7 +13,6 @@ function InputTodo({ addTodo }) {
         } else {
             setMessage("Please write something")
         }
-
     }
 
     const handleChange = (e) => {

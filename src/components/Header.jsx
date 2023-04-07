@@ -1,8 +1,9 @@
 import React from "react";
+import styles from '@/style/Header.module.scss'
 
 function Header({children}){
   return(
-    <div>{children}</div>
+    <div className={styles.header}>{children}</div>
   )
 }
 
