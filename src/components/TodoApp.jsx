@@ -18,6 +18,8 @@ function TodoApp() {
             setTodos(temp)
         }
     }, [])
+    //[] as the second argument, which means it will only run once, when the component is initially rendered.
+
 
     const handleChange = (id) => {
         setTodos((prevState) => {
