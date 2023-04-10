@@ -1,6 +1,7 @@
 import { useState, useRef } from 'react'
 
 import styles from '@/style/TodoItem.module.scss'
+import Modal from '@/components/Modal'
 
 function TodoItem({ todoItem, deleteTodo }) {
 
@@ -9,14 +10,14 @@ function TodoItem({ todoItem, deleteTodo }) {
 
     const inputRef = useRef(null)
 
-    let viewMode = {}
-    let editMode = {}
+    // let viewMode = {}
+    // let editMode = {}
 
-    if(editing) {
-        viewMode.display = "none"
-    }else{
-        editMode.display = "none"
-    }
+    // if(editing) {
+    //     viewMode.display = "none"
+    // }else{
+    //     editMode.display = "none"
+    // }
 
     const handleEditing = () => {
         setEditing(true)
@@ -39,7 +40,7 @@ function TodoItem({ todoItem, deleteTodo }) {
 
     return (
         <li>
-            <div style={viewMode} className={styles.item}>
+            <div className={styles.item}>
             <input
                 type="checkbox"
                 checked={todo.completed}
@@ -52,18 +53,20 @@ function TodoItem({ todoItem, deleteTodo }) {
             <button onClick={() => deleteTodo(todo.id)}>Delete</button>
             </div>
 
+        {editing &&(
+        <Modal
+            showModal={editing}
+            setShowModal={setEditing}
+        >
             <input
                 ref={inputRef}
-                style={editMode}
                 type="text"
                 defaultValue={todo.title}
             />
-            <button
-                style={editMode}
-                onClick={handleUpdateSubmit}
-            >
+            <button onClick={handleUpdateSubmit}>
                 Update
             </button>
+        </Modal>)} 
         </li>
     )
 }
