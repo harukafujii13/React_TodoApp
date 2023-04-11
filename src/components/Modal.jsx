@@ -7,6 +7,8 @@ function Modal({children, showModal, setShowModal}) {
 
     const modalRef = useRef()
     //used to reference the DOM element of the modal
+    //used to detect clicks outside the modal, which can be useful for closing 
+    //the modal when clicking outside of it.
 
     useClickOutside(modalRef, showModal, () => setShowModal(false))
 
