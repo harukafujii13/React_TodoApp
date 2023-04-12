@@ -53,3 +53,10 @@ const TodosProvider = ({ children }) => {
 };
 
 export { TodosContext, TodosProvider };
+
+
+//memo1
+//The TodosProvider component wraps its children with TodosContext.Provider, 
+//which provides the todos state and the three functions (updateTodo, deleteTodo, 
+//and addTodo) as values to the components that consume this context. 
+//The children components can access these values using useContext() hook from React.
