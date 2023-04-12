@@ -1,7 +1,10 @@
 import React from 'react'
 import TodoItem from '@/components/TodoItem'
+import {TodosContext} from '@/context/TodosContext'
+import { useContext } from 'react'
 
-function TodoList({ todos, handleChange, deleteTodo }) {
+function TodoList() {
+    const {todos} = useContext(TodosContext)
 
     return (
         <ul>
@@ -9,8 +12,6 @@ function TodoList({ todos, handleChange, deleteTodo }) {
                 <TodoItem
                     key={todo.id}
                     todoItem={todo}
-                    handleChange={handleChange}
-                    deleteTodo={deleteTodo}
                 />
             )}
         </ul>

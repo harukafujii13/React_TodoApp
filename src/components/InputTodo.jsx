@@ -1,8 +1,12 @@
-import { useState } from 'react'
+import { useState, useContext } from 'react'
+import { useFlasher } from '@/hooks/useFlasher'
+import { TodosContext } from '@/context/TodosContext'
 
-function InputTodo({ addTodo }) {
+function InputTodo() {
     const [title, setTitle] = useState('')
     const [message, setMessage] = useState('')
+
+    const { addTodo } = useContext(TodosContext)
 
     const handleSubmit = (e) => {
         e.preventDefault()
@@ -21,7 +25,7 @@ function InputTodo({ addTodo }) {
     }
 
     return (
-        <>
+        <div ref={useFlasher()}>
             <form onSubmit={handleSubmit} >
                 <input
                     type="text"
@@ -32,7 +36,7 @@ function InputTodo({ addTodo }) {
                 <button>Submit</button>
             </form>
             <span style={{ fontSize: "0.7rem", color: "red"}}>{message}</span>
-        </>
+        </div>
     )
 }
 

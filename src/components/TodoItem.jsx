@@ -1,14 +1,20 @@
-import { useState, useRef } from 'react'
+import { useState, useRef, useContext } from 'react'
+import { HiOutlineTrash } from 'react-icons/hi'
 
 import styles from '@/style/TodoItem.module.scss'
-import Modal from '@/components/Modal'
 
-function TodoItem({ todoItem, deleteTodo }) {
+import Modal from '@/components/Modal'
+import { useFlasher } from '@/hooks/useFlasher'
+import { TodosContext } from '@/context/TodosContext'
+
+
+function TodoItem({ todoItem }) {
 
     // const [todo, setTodo] = useState(todoItem)
     const [editing, setEditing] = useState(false)
 
     const inputRef = useRef(null)
+    const { deleteTodo, updateTodo } = useContext(TodosContext)
 
     // let viewMode = {}
     // let editMode = {}
@@ -24,54 +30,51 @@ function TodoItem({ todoItem, deleteTodo }) {
     }
 
     const handleUpdateSubmit = () => {
-        setTodo({
-            ...todo,
-            title: inputRef.current.value
-        })
+        updateTodo(todoItem.id, "title", inputRef.current.value)
         setEditing(false)
     }
 
     const handleChange = () => {
-        setTodo({
-            ...todo,
-            completed: !todo.completed
-        })
+        updateTodo(todoItem.id, "completed", !todoItem.completed)
     }
 
     return (
         <li>
-            <div className={styles.item}>
-            <input
-                type="checkbox"
-                checked={todoItem.completed}
-                onChange={handleChange}
-            />
-            <span style={ todoItem.completed ? { textDecoration: "line-through"}: null}>
-                {todoItem.title}
-            </span>
-            <button onClick={handleEditing}>Edit</button>
-            <button onClick={() => deleteTodo(todoItem.id)}>Delete</button>
+            <div className={styles.item} ref={useFlasher()}>
+                <input
+                    type="checkbox"
+                    checked={todoItem.completed}
+                    onChange={handleChange}
+                />
+                <span style={todoItem.completed ? { textDecoration: "line-through" } : null}>
+                    {todoItem.title}
+                </span>
+                <button onClick={handleEditing}>Edit</button>
+                <button onClick={() => deleteTodo(todoItem.id)}>
+                    <HiOutlineTrash />
+                </button>
             </div>
 
-        {editing &&(
-        <Modal
-            showModal={editing}
-            setShowModal={setEditing}
-        >
-            <input
-                ref={inputRef}
-                type="text"
-                defaultValue={todoItem.title}
-            />
-            <button onClick={handleUpdateSubmit}>
-                Update
-            </button>
-        </Modal>)} 
+            {editing && (
+                <Modal
+                    showModal={editing}
+                    setShowModal={setEditing}
+                >
+                    <input
+                        ref={inputRef}
+                        type="text"
+                        defaultValue={todoItem.title}
+                    />
+                    <button onClick={handleUpdateSubmit}>
+                        Update
+                    </button>
+                </Modal>
+            )}
         </li>
     )
 }
 
-export default TodoItem
+export default TodoItem 
 
 //note1
 //The component defines two objects, "viewMode" and "editMode", 
