@@ -5,7 +5,7 @@ import Modal from '@/components/Modal'
 
 function TodoItem({ todoItem, deleteTodo }) {
 
-    const [todo, setTodo] = useState(todoItem)
+    // const [todo, setTodo] = useState(todoItem)
     const [editing, setEditing] = useState(false)
 
     const inputRef = useRef(null)
@@ -43,14 +43,14 @@ function TodoItem({ todoItem, deleteTodo }) {
             <div className={styles.item}>
             <input
                 type="checkbox"
-                checked={todo.completed}
+                checked={todoItem.completed}
                 onChange={handleChange}
             />
-            <span style={ todo.completed ? { textDecoration: "line-through"}: null}>
-                {todo.title}
+            <span style={ todoItem.completed ? { textDecoration: "line-through"}: null}>
+                {todoItem.title}
             </span>
             <button onClick={handleEditing}>Edit</button>
-            <button onClick={() => deleteTodo(todo.id)}>Delete</button>
+            <button onClick={() => deleteTodo(todoItem.id)}>Delete</button>
             </div>
 
         {editing &&(
@@ -61,7 +61,7 @@ function TodoItem({ todoItem, deleteTodo }) {
             <input
                 ref={inputRef}
                 type="text"
-                defaultValue={todo.title}
+                defaultValue={todoItem.title}
             />
             <button onClick={handleUpdateSubmit}>
                 Update

@@ -39,6 +39,21 @@ function TodoApp() {
     //TodoItemnのcheckboxでチェックしたidを引数とし、prevStateのtodosオブジェクトの中の
     //todoの中のtodo.idと引数のidが一致したらcompletedがtrueになる
 
+    const updateTodo = (id, key, updateValue) => {
+        setTodos((prevState) => {
+            return prevState.map(todo => {
+                if (todo.id === id) {
+                    return {
+                        ...todo,
+                        completed: !todo.completed
+                    }
+                }
+
+                return todo
+            })
+        })
+    }
+
 
     const deleteTodo = (id) => {
         setTodos((prevState) => {
