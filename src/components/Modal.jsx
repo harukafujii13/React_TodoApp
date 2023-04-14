@@ -6,6 +6,9 @@ function Modal({children, showModal, setShowModal}) {
     // const [showModal, setShowModal] = useState(false)
 
     const modalRef = useRef()
+    //useEffectとは
+    //re-renderingを防止する働きがある
+    //DOMのように特定の要素を取得する働きがある
     //used to reference the DOM element of the modal
     //used to detect clicks outside the modal, which can be useful for closing 
     //the modal when clicking outside of it.
